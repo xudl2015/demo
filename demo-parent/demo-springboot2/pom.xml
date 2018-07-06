@@ -66,6 +66,11 @@
                 <artifactId>dubbo</artifactId>
                 <version>2.6.1</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.7</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
@@ -84,5 +89,6 @@
     </build>
     <modules>
         <module>demo-springboot2-depend</module>
+        <module>demo-springboot2-web</module>
     </modules>
 </project>
