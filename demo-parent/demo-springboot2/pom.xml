@@ -1,0 +1,88 @@
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.xudl.demo</groupId>
+        <artifactId>demo-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../demo-parent</relativePath>
+    </parent>
+    <groupId>org.xudl.demo</groupId>
+    <artifactId>demo-springboot2</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>
+                依赖springboot2项目的父项目，定义spring boot 2相关的所有依赖
+    </description>
+    <properties>
+        <springboot.version>2.0.0.RELEASE</springboot.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!-- 不以spring boot 为父项目时，在导入spring boot时 不需要导入版本信息 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>4.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.47</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>6.0.6</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.1.9</version>
+            </dependency>
+            <!-- 导入mybatis的功能，并配置依赖包。默认依赖1.5的spring boot版本，如果使用2.x版本，则需要单独导入 -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.3.1</version>
+            </dependency>
+            <!-- 导入dubbo相关配置，手动配置dubbo的版本和spring的版本 -->
+            <dependency>
+                <groupId>com.gitee.reger</groupId>
+                <artifactId>spring-boot-starter-dubbo</artifactId>
+                <version>1.1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>2.6.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugin>
+                <!-- 打包插件 -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${springboot.version}</version>
+                <configuration>
+                    <!-- 指定程序入口类 -->
+                    <mainClass>com.noah.netdep.monitor.MonitorStartApplication</mainClass>
+                </configuration>
+            </plugin>
+        </pluginManagement>
+    </build>
+    <modules>
+        <module>demo-springboot2-depend</module>
+    </modules>
+</project>

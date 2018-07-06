@@ -1,0 +1,41 @@
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.xudl.demo</groupId>
+    <artifactId>demo-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>
+        demo项目的父项目，定义maven仓库位置等最基本的信息
+    </description>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.repository.url>http://192.168.1.68:8081/nexus/content/repositories</maven.repository.url>
+    </properties>
+    <!-- 指定本地maven库信息 -->
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>${maven.repository.url}/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>${maven.repository.url}/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <build>
+        <pluginManagement>
+            <plugin>
+                <!-- 版本管理插件 -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.5</version>
+            </plugin>
+        </pluginManagement>
+    </build>
+    <modules>
+        <module>demo-springboot2</module>
+    </modules>
+</project>
