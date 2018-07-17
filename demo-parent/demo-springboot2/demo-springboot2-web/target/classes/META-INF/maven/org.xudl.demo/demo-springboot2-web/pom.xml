@@ -17,13 +17,42 @@
     </description>
     <dependencies>
         <dependency>
+            <groupId>org.tensorflow</groupId>
+            <artifactId>tensorflow</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.xudl.demo</groupId>
             <artifactId>demo-springboot2-depend</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!-- 添加自动重启功能 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baidu.aip</groupId>
+            <artifactId>java-sdk</artifactId>
+            <version>4.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>0.4.8</version>
+        </dependency>
     </dependencies>
     <build>
-        <finalName>springboot2demo</finalName>
+        <finalName>demo-springboot2-web</finalName>
         <plugins>
             <plugin>
                 <!-- 版本管理插件 -->

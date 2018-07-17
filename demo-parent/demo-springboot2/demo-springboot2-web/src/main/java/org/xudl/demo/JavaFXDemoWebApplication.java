@@ -3,7 +3,6 @@ package org.xudl.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.xudl.demo.util.IPScanUtil;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -43,7 +42,7 @@ public class JavaFXDemoWebApplication extends Application {
 	public void start(Stage stage) throws Exception {
 		StackPane root = new StackPane();
 
-		String localIp = IPScanUtil.localIpscan();
+		// String localIp = IPScanUtil.localIpscan();
 
 		WebView view = new WebView();
 		WebEngine engine = view.getEngine();

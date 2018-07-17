@@ -9,6 +9,14 @@ public class DemoProperties {
 	private String name;
 	private String welcome;
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(" name:").append(name);
+		builder.append(" welcome:").append(welcome);
+		return builder.toString();
+	}
+
 	public String getName() {
 		return name;
 	}

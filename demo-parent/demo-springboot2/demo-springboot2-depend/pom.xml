@@ -34,19 +34,14 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
-        <!-- 设置内嵌tomcat的作用域，使得开发时可以直接使用 -->
+        <!-- 设置内嵌tomcat的作用域，使得开发时可以直接使用 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>
+        -->
         <!-- aop相关配置 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
