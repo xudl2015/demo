@@ -5,31 +5,51 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Size;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+
+import com.sun.scenario.effect.GaussianBlur;
+
+import net.coobird.thumbnailator.Thumbnails;
+import nu.pattern.OpenCV;
+
 public class ImageUtil {
 	public static void main(String[] args) throws Exception {
-		/*float[][] kernals = get2DKernalData(1, 1);
-		String path = "D:\\\\noah\\\\拍书\\\\人教版-初中-数学-七年级-下学期-12版\\\\校验测试图\\\\";
-		BufferedImage image = ImageIO.read(new File(path + "8_1.jpg"));
-		float[] data = new float[9];
-		int idx = 0;
-		for (int i = 0; i < kernals.length; i++) {
-			float[] cols = kernals[i];
-			for (int j = 0; j < cols.length; j++) {
-				System.out.println(idx);
-				data[idx++] = cols[j];
-			}
-		}
-		Kernel kernel = new Kernel(3, 3, data);
-		ConvolveOp imageOp = new ConvolveOp(kernel, ConvolveOp.EDGE_NO_OP, null); // 创建卷积变换操作对象
-		BufferedImage filteredBufImage = new BufferedImage(image.getWidth(), image.getHeight(),
-		        BufferedImage.TYPE_INT_ARGB); // 过滤后的缓冲区图像
-		imageOp.filter(image, filteredBufImage);// 过滤图像，目标图像在filteredBufImage
-		ImageIO.write(filteredBufImage, "jpg", new File(path + "8_02.jpg"));
-		System.out.println("----success------");*/
-		test2();
+		/*float[][] kernals = get2DKernalData(1, 1.5F);
+		normalization(kernals);*/
+
+		OpenCV.loadShared();
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+
+		String path = "D:\\noah\\temp\\";
+		Mat im = Imgcodecs.imread(path + "a.png");
+		System.out.println(im.empty());
+		Mat dst = new Mat();
+		Imgproc.GaussianBlur(im, dst, new Size(15, 15), 0);
+		Imgproc.cvtColor(im, dst, Imgproc.COLOR_BGR2GRAY);
+		Imgcodecs.imwrite(path + "5_1-5.jpg", dst);
+		/*GaussianBlurFilter filter = new GaussianBlurFilter();
+		filter.setSigma(10);
+		
+		RxImageData.bitmap(bitmap).addFilter(filter).into(image2);*/
+	}
+
+	public static void test3() throws IOException {
+		String path = "D:\\noah\\拍书\\人教版-初中-数学-七年级-下学期-12版\\校验测试图\\";
+
+		GaussianBlur blur = new GaussianBlur();
+
+		BufferedImage fromImage = ImageIO.read(new File(path + "8_1.jpg"));
+		BufferedImage toImage = new BufferedImage(fromImage.getWidth(), fromImage.getHeight(),
+		        BufferedImage.TYPE_INT_RGB);
+		ImageIO.write(toImage, "jpg", new File(path + "8_03.jpg"));
 	}
 
 	public static void test2() throws Exception {
@@ -46,7 +66,7 @@ public class ImageUtil {
 				fillMatrix(martrix, values);
 				img.setRGB(i, j, avgMatrix(kernals, martrix));
 			}
-		ImageIO.write(img, "jpg", new File(path + "8_01.jpg"));
+		ImageIO.write(img, "jpg", new File(path + "8_02.jpg"));
 		System.out.println("----success------");
 	}
 
@@ -89,6 +109,9 @@ public class ImageUtil {
 		for (int i = 0; i < matrix.length; i++) {
 			int[] x = matrix[i];
 			for (int j = 0; j < x.length; j++) {
+				if (i == 1 && j == 1) {
+					continue;
+				}
 				float kernal = kernals[i][j];
 				Color c = new Color(x[j]);
 				r += c.getRed() * kernal;
@@ -123,6 +146,32 @@ public class ImageUtil {
 			index++;
 		}
 		return kernalData;
+	}
+
+	// 进行归一化处理，使得所有元素的和为1
+	public static float[][] normalization(float[][] kernal) {
+		// 计算所有的值的合
+		float sum = 0F;
+		for (int i = 0; i < kernal.length; i++) {
+			float[] x = kernal[i];
+			for (int j = 0; j < kernal.length; j++) {
+				sum += x[j];
+			}
+		}
+
+		float normalSum = 0F;
+		float[][] normalizKernal = new float[kernal.length][kernal.length];
+		for (int i = 0; i < kernal.length; i++) {
+			float[] x = kernal[i];
+			for (int j = 0; j < kernal.length; j++) {
+				normalizKernal[i][j] = x[j] / sum;
+				normalSum += normalizKernal[i][j];
+				System.out.print("\t" + normalizKernal[i][j]);
+			}
+			System.out.println("\n\t---------------------------");
+		}
+		System.out.println(String.format("sum:%s,normal-sum:%s", sum, normalSum));
+		return normalizKernal;
 	}
 
 	/**

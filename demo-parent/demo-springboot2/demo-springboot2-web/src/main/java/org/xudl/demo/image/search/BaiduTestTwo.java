@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import com.baidu.aip.imagesearch.AipImageSearch;
 
-public class BaiduTest {
+public class BaiduTestTwo {
 
 	// 设置APPID/AK/SK
 	public static final String APP_ID = "10996719";
@@ -24,20 +24,20 @@ public class BaiduTest {
 	}
 
 	public static void main(String[] args) throws Exception {
-		// batchUpload(new File("D:\\noah\\拍书\\图片"));
+		batchUpload(new File("D:\\noah\\拍书\\图片"));
 		// delete("D:\\noah\\拍书\\人教版-初中-数学-七年级-下学期-12版\\0扫描图");
 		// search("D:\\noah\\拍书\\人教版-初中-数学-七年级-下学期-12版\\校验测试图");
 
 		// uploadSame("D:\\noah\\拍书\\人教版-初中-数学-七年级-下学期-12版\\0扫描图");
-		searchSame("D:\\noah\\temp");
+		// searchSame("D:\\noah\\拍书\\人教版-初中-数学-七年级-下学期-12版\\校验测试图");
 	}
 
 	public static void search(String dirPath) {
 		// 传入可选参数调用接口
 		HashMap<String, String> options = new HashMap<String, String>();
-		options.put("tags", "2,2000");
+		options.put("tags", "1,1000");
 		options.put("pn", "0");
-		options.put("rn", "5");
+		options.put("rn", "10");
 
 		File fileDir = new File(dirPath);
 		for (File file : fileDir.listFiles()) {
@@ -60,8 +60,8 @@ public class BaiduTest {
 				        + file.getName().substring(0, file.getName().lastIndexOf("."));
 				HashMap<String, String> options = new HashMap<String, String>();
 				options.put("brief", brief);
-				options.put("tags", "2,2000");
-				JSONObject res = client.similarAdd(file.getPath(), options);
+				options.put("tags", "3,3000");
+				JSONObject res = client.sameHqAdd(file.getPath(), options);
 
 				System.err.println(brief + ":::::" + res);
 			}
@@ -116,10 +116,10 @@ public class BaiduTest {
 	public static void searchSame(String dirPath) {
 		// 传入可选参数调用接口
 		HashMap<String, String> options = new HashMap<String, String>();
-		options.put("tags", "3,3000");
+		options.put("tags", "2,2000");
 		options.put("tag_logic", "0");
-		/*options.put("pn", "0");
-		options.put("rn", "10");*/
+		options.put("pn", "0");
+		options.put("rn", "10");
 
 		File fileDir = new File(dirPath);
 		for (File file : fileDir.listFiles()) {
