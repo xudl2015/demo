@@ -15,7 +15,7 @@
     <description>
         springboot2web相关设置
     </description>
-    <dependencies>
+    <dependencies> 
         <dependency>
             <groupId>org.xudl.demo</groupId>
             <artifactId>demo-springboot2-depend</artifactId>
