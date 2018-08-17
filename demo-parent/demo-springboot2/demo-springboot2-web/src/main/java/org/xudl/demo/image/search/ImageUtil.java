@@ -1,16 +1,23 @@
 package org.xudl.demo.image.search;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.Rect;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
@@ -29,16 +36,79 @@ public class ImageUtil {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 
 		String path = "D:\\noah\\temp\\";
-		Mat im = Imgcodecs.imread(path + "a.png");
+		Mat im = Imgcodecs.imread(path + "1.jpg");
 		System.out.println(im.empty());
+
+		Mat roi_img = new Mat(im, new Rect(10, 15, im.height(), im.width()));
+
+		Mat cutImg = new Mat();
+		roi_img.copyTo(cutImg);
+		Imgcodecs.imwrite(path + "1-6.jpg", cutImg);
+
 		Mat dst = new Mat();
 		Imgproc.GaussianBlur(im, dst, new Size(15, 15), 0);
 		Imgproc.cvtColor(im, dst, Imgproc.COLOR_BGR2GRAY);
-		Imgcodecs.imwrite(path + "5_1-5.jpg", dst);
-		/*GaussianBlurFilter filter = new GaussianBlurFilter();
+
+		/*Imgcodecs.imwrite(path + "1-1.jpg", dst);
+		GaussianBlurFilter filter = new GaussianBlurFilter();
 		filter.setSigma(10);
 		
 		RxImageData.bitmap(bitmap).addFilter(filter).into(image2);*/
+
+	}
+
+	/**
+	 * 当前拍摄搜索前处理。将图片按指定位置进行切割。如果搜索不到，则重新切割后再搜索。
+	 * 
+	 * @throws Exception
+	 */
+	public static void imageDealInJavaApi() throws Exception {
+		String path = "D:\\noah\\拍书\\测试书本和图片\\英语\\抽测图片-人教版英语八年级上册";
+		File dir = new File(path);
+		for (File file : dir.listFiles()) {
+			if (file.isDirectory()) {
+				continue;
+			}
+			String fileName = file.getName().substring(0, file.getName().lastIndexOf("."));
+			BufferedImage inputImage = ImageIO.read(file);
+			java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
+			ImageIO.write(inputImage, "jpg", out);
+			ImageInputStream inputStream = ImageIO.createImageInputStream(new ByteArrayInputStream(out.toByteArray()));
+
+			// 获取注册的图片读取器。ImageReader 可以对图片进行转换和解码
+			Iterator<ImageReader> imageReaderIterator = ImageIO.getImageReadersByFormatName("jpg");
+			ImageReader imageReader = imageReaderIterator.next();
+			imageReader.setInput(inputStream, true);
+
+			// 截图的坐标: x，y,width,height
+			/*int[][] cutDatas = new int[][] {
+			        { 1, 12, 765, 575 },
+			        { 1, 12, 765, 379 },
+			
+			        { 135, 0, 496, 599 },
+			        { 135, 0, 496, 399 },
+			        { 135, 100, 496, 299 }
+			};*/
+
+			int[][] cutDatas = new int[][] {
+			        { 135, 0, 496, 599 }
+			};
+
+			for (int i = 0; i < cutDatas.length; i++) {
+				int[] data = cutDatas[i];
+				Rectangle rect = new Rectangle(data[0], data[1], data[2], data[3]);
+				ImageReadParam param = imageReader.getDefaultReadParam();
+				param.setSourceRegion(rect);
+
+				BufferedImage cutImage = imageReader.read(0, param);
+				File cutFile = new File(path + "\\剪切图\\" + fileName + "-cut-" + (i + 1) + ".jpg");
+				if (!cutFile.getParentFile().exists()) {
+					cutFile.getParentFile().mkdirs();
+				}
+				ImageIO.write(cutImage, "jpg", cutFile);
+			}
+		}
+		System.out.println("----cut end-----");
 	}
 
 	public static void test3() throws IOException {

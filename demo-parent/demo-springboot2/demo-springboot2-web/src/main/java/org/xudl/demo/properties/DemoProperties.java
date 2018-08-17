@@ -4,16 +4,18 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "xudl.demo")
+@ConfigurationProperties(prefix = "demo")
 public class DemoProperties {
 	private String name;
-	private String welcome;
+	private String age;
+	private InnerDemo inner = new InnerDemo();
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(" name:").append(name);
-		builder.append(" welcome:").append(welcome);
+		builder.append("name:").append(name)
+		        .append(" age:").append(age)
+		        .append(" inner.name:").append(inner.getName());
 		return builder.toString();
 	}
 
@@ -25,12 +27,32 @@ public class DemoProperties {
 		this.name = name;
 	}
 
-	public String getWelcome() {
-		return welcome;
+	public String getAge() {
+		return age;
 	}
 
-	public void setWelcome(String welcome) {
-		this.welcome = welcome;
+	public void setAge(String age) {
+		this.age = age;
 	}
 
+	public InnerDemo getInner() {
+		return inner;
+	}
+
+	public void setInner(InnerDemo inner) {
+		this.inner = inner;
+	}
+
+	class InnerDemo {
+		private String name;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+	}
 }
