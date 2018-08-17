@@ -1,0 +1,133 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "org.xudl.demo.web.config.DemoProperties",
+      "name": "demo",
+      "type": "org.xudl.demo.web.config.DemoProperties"
+    },
+    {
+      "sourceType": "org.xudl.demo.web.config.DemoProperties",
+      "name": "demo.inner",
+      "sourceMethod": "public org.xudl.demo.web.config.DemoProperties.InnerDemo getInner() ",
+      "type": "org.xudl.demo.web.config.DemoProperties$InnerDemo"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq",
+      "type": "org.xudl.demo.mq.rocketmq.RocketMQProperties"
+    },
+    {
+      "sourceType": "org.xudl.demo.properties.DemoProperties",
+      "name": "xudl.demo",
+      "type": "org.xudl.demo.properties.DemoProperties"
+    },
+    {
+      "sourceType": "org.xudl.demo.properties.PublicProperties",
+      "name": "xudl.demo2",
+      "type": "org.xudl.demo.properties.PublicProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "org.xudl.demo.web.config.DemoProperties",
+      "name": "demo.age",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.web.config.DemoProperties$InnerDemo",
+      "name": "demo.inner.name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.web.config.DemoProperties",
+      "name": "demo.name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.consumer-batch-max-size",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.consumer-broadcasting",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.cusumer-group-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.cusumer-instance-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.enable-his-consumer",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.enable-order-consumer",
+      "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.nameserver-addr",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.producer-group-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.producer-instance-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.subscribe",
+      "type": "java.util.List<java.lang.Object>"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.transaction-producer-group-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.mq.rocketmq.RocketMQProperties",
+      "name": "rocketmq.transaction-producer-instance-name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.properties.DemoProperties",
+      "name": "xudl.demo.name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.properties.DemoProperties",
+      "name": "xudl.demo.welcome",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.properties.PublicProperties",
+      "name": "xudl.demo2.age",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "org.xudl.demo.properties.PublicProperties",
+      "name": "xudl.demo2.name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.xudl.demo.properties.PublicProperties",
+      "name": "xudl.demo2.welcome",
+      "type": "java.lang.String"
+    }
+  ]
+}

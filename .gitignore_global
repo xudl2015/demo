@@ -1,0 +1,9 @@
+####################################
+############# 定义不提交的文件列表 #############
+####################################
+*.classpath           # 所有目录下或者后缀是.classpath
+*.settings/*          # 所有目录下或者后缀是.settings，以及.settings下所有文件
+*.gitignore           # 所有目录下或者后缀是.gitignore
+*.classes             # 所有的classes目录下的内容
+target/*              # target目录中的内容
+org.eclipse.*	  # 忽略Eclipse下的文件
